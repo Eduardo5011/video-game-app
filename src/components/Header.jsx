@@ -1,17 +1,41 @@
 import Logo from "../assets/Images/logo.png";
 import { HiOutlineSearch } from "react-icons/hi";
 import { HiMoon } from "react-icons/hi2";
+import { HiSun } from "react-icons/hi";
+import { useContext, useEffect } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Header = () => {
+ 
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  useEffect(()=> {
+    console.log("Theme", theme)
+  },[])
+
   return (
-    <div className="flex">
-      <img src={Logo} alt="" width={60} height={60} />
-      <div className="flex bg-slate-200 p-2 w-full items-center">
+    <div className="flex items-center p-3">
+      <img src={Logo} width={60} height={60} />
+      <div className="flex bg-slate-200 p-2 w-full mx-5 rounded-full items-center">
         <HiOutlineSearch />
-        <input className="bg-transparent outline-none" type="text" />
+        <input
+          className="px-2 bg-transparent outline-none"
+          type="text"
+          placeholder="Search Games"
+        />
       </div>
       <div>
-        <HiMoon />
+        {theme=='light' ? (
+          <HiMoon
+            className="text-[35px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
+            onClick={() => {setTheme('dark'); localStorage.setItem('theme', 'dark')}}
+          />
+        ) : (
+          <HiSun
+            className="text-[35px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
+            onClick={() => {setTheme('light'); localStorage.setItem('theme', 'light')}}
+          />
+        )}
       </div>
     </div>
   );
