@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import { ThemeContext } from "./context/ThemeContext";
 
+
 function App() {
   const [theme, setTheme] = useState("dark");
 
