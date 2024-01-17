@@ -12,6 +12,11 @@ const getGenreList = axiosInstance.get(
   `/genres?key=${import.meta.env.VITE_API_KEY}`
 );
 
+const getAllGames = axiosInstance.get(
+  `/games?key=${import.meta.env.VITE_API_KEY}`
+);
+
 export default {
   getGenreList,
+  getAllGames
 };
