@@ -19,6 +19,7 @@ export const GameProvider = ({ children }) => {
         setGenres(response.data);
       } catch (error) {
         console.error("Error fetching genres:", error);
+        console.log(error.response);
       }
     };
 
@@ -28,18 +29,17 @@ export const GameProvider = ({ children }) => {
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching games:", error);
+        console.log(error.response);
       }
     };
     fetchGenresList();
     fetchAllGames();
   }, []);
 
-  const contextValue = {
-    games,
-    genres,
-  };
   return (
-    <GameContext.Provider value={contextValue}>{children}</GameContext.Provider>
+    <GameContext.Provider value={{ games, genres }}>
+      {children}
+    </GameContext.Provider>
   );
 };
 

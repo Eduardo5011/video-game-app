@@ -7,6 +7,7 @@ const GeneralList = () => {
   // Use genres from context
   const { genres } = useGames();
 
+
   return (
     <div>
       <h2 className="text-[30px] font-bold dark:text-white">Genre</h2>
