@@ -1,22 +1,19 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-export const GameContext = createContext();
+const GameContext = createContext();
 
 export const useGames = () => {
-    const context = useContext(GameContext);
-    if (context === undefined) {
-      throw new Error('useGames must be used within a GameProvider');
-    }
-    return context;
-  };
+  return useContext(GameContext);
+};
 
 export const GameProvider = ({ children }) => {
   const [genres, setGenres] = useState([]);
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    const fetchGenres = async () => {
+    const fetchGenresList = async () => {
       try {
         const response = await axios.get("http://localhost:3000/genres");
         setGenres(response.data);
@@ -25,7 +22,7 @@ export const GameProvider = ({ children }) => {
       }
     };
 
-    const fetchGames = async () => {
+    const fetchAllGames = async () => {
       try {
         const response = await axios.get("http://localhost:3000/games");
         setGames(response.data);
@@ -33,12 +30,19 @@ export const GameProvider = ({ children }) => {
         console.error("Error fetching games:", error);
       }
     };
-    fetchGenres();
-    fetchGames();
+    fetchGenresList();
+    fetchAllGames();
   }, []);
+
+  const contextValue = {
+    games,
+    genres,
+  };
   return (
-    <GameContext.Provider value={{ genres, games }}>
-      {children}
-    </GameContext.Provider>
+    <GameContext.Provider value={contextValue}>{children}</GameContext.Provider>
   );
+};
+
+GameProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
