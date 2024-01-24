@@ -66,6 +66,11 @@ app.get('/games', async (req, res) => {
 
 
 app.get('/games/:genreId', async (req, res) => {
+
+  const genreId = req.params.genreId;
+    if (!genreId) {
+        return res.status(400).send('No genre ID provided');
+    }
   try {
       const genreId = req.params.genreId;
       const response = await axiosInstance.get(`/games`, {
@@ -75,7 +80,7 @@ app.get('/games/:genreId', async (req, res) => {
           }
       });
 
-      res.json(response.data);
+      res.json(response.data.results);
   } catch (error) {
       console.error("Error occurred while fetching games:", error);
       res.status(500).send('Error occurred while fetching games by genre');
