@@ -64,6 +64,26 @@ app.get('/games', async (req, res) => {
 });
 
 
+
+app.get('/games/:genreId', async (req, res) => {
+  try {
+      const genreId = req.params.genreId;
+      const response = await axiosInstance.get(`/games`, {
+          params: {
+              key: process.env.RAWG_API_KEY,
+              genres: genreId
+          }
+      });
+
+      res.json(response.data);
+  } catch (error) {
+      console.error("Error occurred while fetching games:", error);
+      res.status(500).send('Error occurred while fetching games by genre');
+  }
+});
+
+
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
