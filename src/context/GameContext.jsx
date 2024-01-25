@@ -11,8 +11,32 @@ export const useGames = () => {
 export const GameProvider = ({ children }) => {
   const [genres, setGenres] = useState([]);
   const [games, setGames] = useState([]);
-  const [fetchGenreId, setFetchGenreId] = useState([]);
-  
+  const [genreId, setGenreId] = useState(null);
+  const [gamesByGenre, setGamesByGenre] = useState([]);
+
+  useEffect(() => {
+    if (genreId) {
+      fetchGenreById(genreId);
+    }
+  }, [genreId]);
+
+  const fetchGenreById = async (genreId) => {
+    
+    if (!genreId) {
+      console.error("No genre ID provided");
+      return;
+    }
+    
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/games/${genreId}`
+        );
+        
+      setGamesByGenre(response.data.results); // Adjust based on the actual response structure
+    } catch (error) {
+      console.error("Error fetching gameId:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchGenresList = async () => {
@@ -28,6 +52,7 @@ export const GameProvider = ({ children }) => {
     const fetchAllGames = async () => {
       try {
         const response = await axios.get("http://localhost:3000/games");
+        setGamesByGenre(response.data) // <== need or don't need COME BACK
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching games:", error);
@@ -35,24 +60,12 @@ export const GameProvider = ({ children }) => {
       }
     };
 
-    const fetchGenreById = async (genreId) => {
-      try {
-         
-          const response = await axios.get(`http://localhost:3000/api/games/${genreId}`);
-          setFetchGenreId(response.data.results); // Adjust based on the actual response structure
-      } catch (error) {
-          console.error('Error fetching games:', error);
-      }
-  };
-
-
-  fetchGenreById()
     fetchGenresList();
     fetchAllGames();
   }, []);
 
   return (
-    <GameContext.Provider value={{ games, genres, fetchGenreId }}>
+    <GameContext.Provider value={{ games, genres, genreId, setGenreId, gamesByGenre }}>
       {children}
     </GameContext.Provider>
   );
