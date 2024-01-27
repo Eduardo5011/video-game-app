@@ -65,7 +65,7 @@ app.get('/games', async (req, res) => {
 
 
 
-app.get('/games/:genreId', async (req, res) => {
+app.get('/api/games/:genreId', async (req, res) => {
 
   const genreId = req.params.genreId;
     if (!genreId) {

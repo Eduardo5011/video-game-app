@@ -21,6 +21,7 @@ export const GameProvider = ({ children }) => {
   }, [genreId]);
 
   const fetchGenreById = async (genreId) => {
+    console.log("fetchGenreById called with genreId:", genreId);
     
     if (!genreId) {
       console.error("No genre ID provided");
@@ -42,6 +43,7 @@ export const GameProvider = ({ children }) => {
     const fetchGenresList = async () => {
       try {
         const response = await axios.get("http://localhost:3000/genres");
+        
         setGenres(response.data);
       } catch (error) {
         console.error("Error fetching genres:", error);

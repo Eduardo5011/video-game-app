@@ -1,19 +1,24 @@
 import {  useState } from "react";
 import { useGames } from "../context/GameContext";
 
-const GeneralList = () => {
+const GeneralList = ({setGenreId}) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  
 
   // Use genres from context
   const { genres } = useGames();
 
+  
+  const handleGenreClick = (genreId) => {
+    setGenreId(genreId); // This will update the genreId in the context
+  };
 
   return (
     <div>
       <h2 className="text-[30px] font-bold dark:text-white">Genre</h2>
       {genres.map((item, index) => (
         <div
-        onClick={() => setActiveIndex(index)}
+        onClick={() => handleGenreClick(item.id)}
         key={item.id}
         className={`flex gap-2 items-center mb-2 cursor-pointer hover:bg-gray-300 p-2 group rounded-lg hover:dark:bg-gray-600 ${
           activeIndex === index ? "bg-gray-300 dark:bg-gray-600" : ""
