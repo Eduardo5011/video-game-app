@@ -22,18 +22,19 @@ export const GameProvider = ({ children }) => {
 
   const fetchGenreById = async (genreId) => {
     console.log("fetchGenreById called with genreId:", genreId);
-    
+
     if (!genreId) {
       console.error("No genre ID provided");
       return;
     }
-    
+
     try {
       const response = await axios.get(
         `http://localhost:3000/api/games/${genreId}`
-        );
-        
-      setGamesByGenre(response.data.results); // Adjust based on the actual response structure
+      );
+
+      setGamesByGenre(response.data); // <== need or don't need COME BACK
+      // Adjust based on the actual response structure
     } catch (error) {
       console.error("Error fetching gameId:", error);
     }
@@ -43,7 +44,7 @@ export const GameProvider = ({ children }) => {
     const fetchGenresList = async () => {
       try {
         const response = await axios.get("http://localhost:3000/genres");
-        
+
         setGenres(response.data);
       } catch (error) {
         console.error("Error fetching genres:", error);
@@ -54,7 +55,6 @@ export const GameProvider = ({ children }) => {
     const fetchAllGames = async () => {
       try {
         const response = await axios.get("http://localhost:3000/games");
-        setGamesByGenre(response.data) // <== need or don't need COME BACK
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching games:", error);
@@ -67,7 +67,9 @@ export const GameProvider = ({ children }) => {
   }, []);
 
   return (
-    <GameContext.Provider value={{ games, genres, genreId, setGenreId, gamesByGenre }}>
+    <GameContext.Provider
+      value={{ games, genres, genreId, setGenreId, gamesByGenre }}
+    >
       {children}
     </GameContext.Provider>
   );
