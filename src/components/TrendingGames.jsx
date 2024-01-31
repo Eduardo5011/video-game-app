@@ -11,7 +11,10 @@ const TrendingGames = ({ gameList }) => {
         {gameList.map(
           (item, index) =>
             index < 4 && (
-              <div className="bg-[#76a8f75e] rounded-lg group hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer" key={item.id || index}>
+              <div
+                className="bg-[#76a8f75e] rounded-lg group hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer"
+                key={item.id || index}
+              >
                 <img
                   className="h-[270px] rounded-t-lg object-cover"
                   src={item.background_image}
