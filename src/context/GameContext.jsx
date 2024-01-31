@@ -55,6 +55,7 @@ export const GameProvider = ({ children }) => {
     const fetchAllGames = async () => {
       try {
         const response = await axios.get("http://localhost:3000/games");
+        setGamesByGenre(response.data);
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching games:", error);

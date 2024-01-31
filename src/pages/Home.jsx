@@ -9,6 +9,7 @@ import GamesByGenreId from "../components/GamesByGenreId";
 
 const Home = () => {
   const { games, genreId, setGenreId, gamesByGenre } = useGames();
+  const [selectedGenreName, setSelectedGenreName] = useState('Action');
 
   // const handleGenreChange = (selectedGenreId) => {
   //   getGameListByGenreId(selectedGenreId);
@@ -17,13 +18,13 @@ const Home = () => {
   return (
     <div className="grid grid-cols-4 px-12">
       <div className=" hidden md:block">
-        <GeneralList setGenreId={setGenreId} />
+        <GeneralList setGenreId={setGenreId} selectGenreName={(name)=> setSelectedGenreName(name)}/>
         <RawgAttribution />
       </div>
       <div className="col-span-4 md:col-span-3 ">
         <Banner game={games[0]} />
         <TrendingGames gameList={games} />
-        <GamesByGenreId gamesByGenre={gamesByGenre} />
+        <GamesByGenreId gamesByGenre={gamesByGenre} selectedGenreName={selectedGenreName}/>
       </div>
     </div>
   );
