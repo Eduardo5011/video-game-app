@@ -87,6 +87,34 @@ app.get('/api/games/:genreId', async (req, res) => {
   }
 });
 
+// search for games
+app.get('/games/search', async (req, res) => {
+  const searchTerm = req.query.query; // Use 'query' as the query parameter name
+  if (!searchTerm) {
+      return res.status(400).send('Search term is required');
+  }
+
+  try {
+      const response = await axiosInstance.get(`/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
+      const searchData = response.data.results; // Assuming the results are in 'results'
+      res.json(searchData);
+  } catch (error) {
+      console.error("Error occurred while searching games:", error);
+
+      if (error.response) {
+          // RAWG API response error
+          res.status(error.response.status).send(error.response.data);
+      } else if (error.request) {
+          // No response received
+          res.status(500).send('No response received from RAWG API');
+      } else {
+          // Other errors
+          res.status(500).send('Server error occurred');
+      }
+  }
+});
+
+
 
 
 app.listen(port, () => {
