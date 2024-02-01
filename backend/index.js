@@ -88,7 +88,7 @@ app.get('/api/games/:genreId', async (req, res) => {
 });
 
 // search for games
-app.get('/games/search', async (req, res) => {
+app.get('/games/:search', async (req, res) => {
   const searchTerm = req.query.query; // Use 'query' as the query parameter name
   if (!searchTerm) {
       return res.status(400).send('Search term is required');
