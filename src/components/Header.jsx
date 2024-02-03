@@ -16,6 +16,13 @@ const Header = () => {
     console.log("Theme", theme)
   },[])
 
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="flex items-center p-3">
       <img src={Logo} width={60} height={60} />
@@ -25,6 +32,9 @@ const Header = () => {
           className="px-2 bg-transparent outline-none"
           type="text"
           placeholder="Search Games"
+          value={searchTerm}
+          onKeyDown={handleKeyPress}
+          onChange={e => setSearchTerm(e.target.value)}
         />
       </div>
       <div>
