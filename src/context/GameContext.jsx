@@ -14,6 +14,9 @@ export const GameProvider = ({ children }) => {
   const [genreId, setGenreId] = useState(null);
   const [gamesByGenre, setGamesByGenre] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     if (genreId) {
       fetchGenreById(genreId);
@@ -39,6 +42,17 @@ export const GameProvider = ({ children }) => {
       console.error("Error fetching gameId:", error);
     }
   };
+
+//Search for games
+  const handleSearch = async () => {
+    try {
+        const response = await axios.get(`http://localhost:3000/games/search?query=${searchTerm}`);
+        setSearchResults(response.data); // Update the search results state
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+        // Optionally handle errors in a more specific way
+    }
+};
 
   useEffect(() => {
     const fetchGenresList = async () => {
@@ -69,7 +83,7 @@ export const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ games, genres, genreId, setGenreId, gamesByGenre }}
+      value={{ games, genres, genreId, setGenreId, gamesByGenre, handleSearch, setSearchTerm, searchResults }}
     >
       {children}
     </GameContext.Provider>

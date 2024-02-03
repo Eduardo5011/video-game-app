@@ -4,10 +4,13 @@ import { HiMoon } from "react-icons/hi2";
 import { HiSun } from "react-icons/hi";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import { useGames } from "../context/GameContext";
+
 
 const Header = () => {
  
   const { theme, setTheme } = useContext(ThemeContext);
+  const { searchTerm, setSearchTerm, searchResults, handleSearch } = useGames();
 
   useEffect(()=> {
     console.log("Theme", theme)

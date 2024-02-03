@@ -106,7 +106,7 @@ app.get('/games/:search', async (req, res) => {
           res.status(error.response.status).send(error.response.data);
       } else if (error.request) {
           // No response received
-          res.status(500).send('No response received from RAWG API');
+          res.status(500).send('No response received from RAWG API');ch
       } else {
           // Other errors
           res.status(500).send('Server error occurred');
