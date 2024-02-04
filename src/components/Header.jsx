@@ -23,6 +23,12 @@ const Header = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const currentInput = e.target.value;
+    setSearchTerm(currentInput);
+    console.log(currentInput); // Log the current input value
+  };
+
   return (
     <div className="flex items-center p-3">
       <img src={Logo} width={60} height={60} />
@@ -34,7 +40,7 @@ const Header = () => {
           placeholder="Search Games"
           value={searchTerm}
           onKeyDown={handleKeyPress}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={handleChange}
         />
       </div>
       <div>

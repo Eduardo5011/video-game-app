@@ -47,7 +47,8 @@ export const GameProvider = ({ children }) => {
   const handleSearch = async () => {
     try {
         const response = await axios.get(`http://localhost:3000/games/search?query=${searchTerm}`);
-        setSearchResults(response.data); // Update the search results state
+        setSearchResults(response.data); 
+        console.log('Search results:', response.data); // Update the search results state
     } catch (error) {
         console.error('Error fetching search results:', error);
         // Optionally handle errors in a more specific way
