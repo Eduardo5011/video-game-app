@@ -8,7 +8,7 @@ import TrendingGames from "../components/TrendingGames";
 import GamesByGenreId from "../components/GamesByGenreId";
 
 const Home = () => {
-  const { games, genreId, setGenreId, gamesByGenre } = useGames();
+  const { games, genreId, setGenreId, gamesByGenre, searchResults } = useGames();
   const [selectedGenreName, setSelectedGenreName] = useState("Action");
 
   // const handleGenreChange = (selectedGenreId) => {
@@ -30,6 +30,7 @@ const Home = () => {
         <GamesByGenreId
           gamesByGenre={gamesByGenre}
           selectedGenreName={selectedGenreName}
+          searchResults={searchResults}
         />
       </div>
     </div>

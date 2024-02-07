@@ -1,9 +1,16 @@
 import { useEffect } from "react";
 
-const GamesByGenreId = ({ gamesByGenre, selectedGenreName }) => {
+const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults }) => {
+
+  const gamesToDisplay = searchResults.length > 0 ? searchResults : gamesByGenre;
+  const displayTitle = searchResults.length > 0 ? 'Search Results' : `${selectedGenreName} Games`;
+
   useEffect(() => {
     console.log("gameList", gamesByGenre);
   }, [gamesByGenre]);
+
+
+
   return (
     <div>
       <h2 className="font-bold text-[30px] dark:text-white mt-5">
