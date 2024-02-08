@@ -1,10 +1,17 @@
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
+
 
 const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => {
 
   const shouldDisplaySearchResults = searchResults && searchResults.length > 0;
   const gamesToDisplay = shouldDisplaySearchResults ? searchResults : gamesByGenre;
 
+  GamesByGenreId.propTypes = {
+    gamesByGenre: PropTypes.array.isRequired,
+    selectedGenreName: PropTypes.string.isRequired,
+    searchResults: PropTypes.array.isRequired,
+  };
 
   useEffect(() => {
     console.log("gameList", gamesByGenre);
