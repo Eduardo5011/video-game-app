@@ -11,6 +11,7 @@ const Header = () => {
  
   const { theme, setTheme } = useContext(ThemeContext);
   const { searchTerm, setSearchTerm, searchResults, handleSearch } = useGames();
+  
 
   useEffect(()=> {
     console.log("Theme", theme)

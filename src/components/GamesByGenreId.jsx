@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 
-const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults }) => {
+const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => {
 
-  const gamesToDisplay = searchResults.length > 0 ? searchResults : gamesByGenre;
-  const displayTitle = searchResults.length > 0 ? 'Search Results' : `${selectedGenreName} Games`;
+  const shouldDisplaySearchResults = searchResults && searchResults.length > 0;
+  const gamesToDisplay = shouldDisplaySearchResults ? searchResults : gamesByGenre;
+
 
   useEffect(() => {
     console.log("gameList", gamesByGenre);
   }, [gamesByGenre]);
 
-
+  useEffect(() => {
+    console.log("Search results in GamesByGenreId:", searchResults);
+  }, [searchResults]);
 
   return (
     <div>
@@ -17,7 +20,7 @@ const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults }) => {
         {selectedGenreName} Games
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {gamesByGenre && gamesByGenre.map((item, index) => (
+        {gamesToDisplay && gamesToDisplay.map((item, index) => (
           <div key={index} className="bg-[#76a8f75e] p-3 rounded-lg pb-4 h-full hover:scale-110 transition-all ease-in-out duration-300 cursor-pointer">
             <img
               src={item.background_image}

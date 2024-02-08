@@ -5,10 +5,11 @@ const GeneralList = ({ setGenreId, selectGenreName }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Use genres from context
-  const { genres } = useGames();
+  const { genres, setSearchResults } = useGames();
 
   const handleGenreClick = (genreId) => {
     setGenreId(genreId);
+    setSearchResults([])
   };
 
   return (

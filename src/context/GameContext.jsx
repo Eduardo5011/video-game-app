@@ -84,7 +84,7 @@ export const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ games, genres, genreId, setGenreId, gamesByGenre, handleSearch, setSearchTerm, searchResults }}
+      value={{ games, genres, genreId, setGenreId, gamesByGenre, handleSearch, setSearchTerm, searchResults, setSearchResults }}
     >
       {children}
     </GameContext.Provider>
