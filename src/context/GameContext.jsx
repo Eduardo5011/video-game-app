@@ -33,7 +33,7 @@ export const GameProvider = ({ children }) => {
 
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/games/${genreId}`
+        `https://videogame-0hg9.onrender.com/api/games/${genreId}`
       );
 
       setGamesByGenre(response.data); // <== need or don't need COME BACK
@@ -46,7 +46,7 @@ export const GameProvider = ({ children }) => {
 //Search for games
   const handleSearch = async () => {
     try {
-        const response = await axios.get(`http://localhost:3000/games/search?query=${searchTerm}`);
+        const response = await axios.get(`https://videogame-0hg9.onrender.com/games/search?query=${searchTerm}`);
         setSearchResults(response.data); 
         console.log('Search results:', response.data); // Update the search results state
     } catch (error) {
@@ -58,7 +58,7 @@ export const GameProvider = ({ children }) => {
   useEffect(() => {
     const fetchGenresList = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/genres");
+        const response = await axios.get("https://videogame-0hg9.onrender.com/genres");
 
         setGenres(response.data);
       } catch (error) {
@@ -69,7 +69,7 @@ export const GameProvider = ({ children }) => {
 
     const fetchAllGames = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/games");
+        const response = await axios.get("https://videogame-0hg9.onrender.com/games");
         setGamesByGenre(response.data);
         setGames(response.data);
       } catch (error) {
