@@ -6,7 +6,8 @@ const port = 3000;
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: ['http://localhost:5173', 'https://video-game-list.netlify.app']
+    
   }));
 
 const RAWG_BASE_URL = "https://api.rawg.io/api";
