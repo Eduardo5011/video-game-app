@@ -5,10 +5,19 @@ const cors = require('cors');
 const port = 3000;
 
 const app = express();
+
+
+const allowedOrigins = ['http://localhost:5000', 'https://your-app-name.netlify.app'];
+
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://video-game-list.netlify.app']
-    
-  }));
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 
 const RAWG_BASE_URL = "https://api.rawg.io/api";
 const axiosInstance = axios.create({
