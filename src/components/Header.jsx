@@ -27,7 +27,8 @@ const Header = () => {
   const handleChange = (e) => {
     const currentInput = e.target.value;
     setSearchTerm(currentInput);
-    console.log(currentInput); // Log the current input value
+  
+    // Log the current input value
   };
 
   return (

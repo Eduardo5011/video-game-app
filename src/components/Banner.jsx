@@ -20,7 +20,7 @@ const Banner = ({game}) => {
         />
         </>
       ) : (
-        <p>Loading game or image not available...</p>
+        <p>Loading...</p>
       )}    </div>
   )
 }

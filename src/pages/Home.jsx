@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import GeneralList from "../components/GeneralList";
 import RawgAttribution from "../components/RawgAttribution";
 // import GlobalAPI from "../services/GlobalAPI";

@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import PropTypes from 'prop-types';
+import Spinner from '../components/SpinnerLoader'
 
 
 const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => {
 
   const shouldDisplaySearchResults = searchResults && searchResults.length > 0;
   const gamesToDisplay = shouldDisplaySearchResults ? searchResults : gamesByGenre;
+  
 
   GamesByGenreId.propTypes = {
     gamesByGenre: PropTypes.array.isRequired,
@@ -23,9 +25,10 @@ const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => 
 
   return (
     <div>
-      <h2 className="font-bold text-[30px] dark:text-white mt-5">
-        {selectedGenreName} Games
-      </h2>
+    <h2 className="font-bold text-[30px] dark:text-white mt-5">
+      {selectedGenreName} Games
+    </h2>
+    {gamesToDisplay ? (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {gamesToDisplay && gamesToDisplay.map((item, index) => (
           <div key={index} className="bg-[#76a8f75e] p-3 rounded-lg pb-4 h-full hover:scale-110 transition-all ease-in-out duration-300 cursor-pointer">
@@ -44,7 +47,10 @@ const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => 
           </div>
         ))}
       </div>
-    </div>
+    ) : (
+      <Spinner />
+    )}
+  </div>
   );
 };
 export default GamesByGenreId;
