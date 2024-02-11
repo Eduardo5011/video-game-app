@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import PropTypes from 'prop-types';
-import Spinner from '../components/SpinnerLoader'
+import SpinnerLoader from '../components/SpinnerLoader'
 
 
 const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => {
@@ -48,7 +48,7 @@ const GamesByGenreId = ({ gamesByGenre, selectedGenreName, searchResults  }) => 
         ))}
       </div>
     ) : (
-      <Spinner />
+      <SpinnerLoader />
     )}
   </div>
   );

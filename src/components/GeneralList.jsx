@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGames } from "../context/GameContext";
+import SpinnerLoader from "../components/SpinnerLoader";
 
 const GeneralList = ({ setGenreId, selectGenreName }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -14,8 +15,9 @@ const GeneralList = ({ setGenreId, selectGenreName }) => {
 
   return (
     <div>
-      <h2 className="text-[30px] font-bold dark:text-white">Genre</h2>
-      {genres.map((item, index) => (
+    <h2 className="text-[30px] font-bold dark:text-white">Genre</h2>
+    {genres ? (
+      genres.map((item, index) => (
         <div
           onClick={() => {
             handleGenreClick(item.id);
@@ -42,8 +44,11 @@ const GeneralList = ({ setGenreId, selectGenreName }) => {
             {item.name}
           </h3>
         </div>
-      ))}
-    </div>
+      ))
+    ) : (
+      <SpinnerLoader/>
+    )}
+  </div>
   );
 };
 export default GeneralList;
